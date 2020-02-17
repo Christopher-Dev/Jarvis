@@ -2,18 +2,16 @@ import discord
 import random
 from discord.ext import commands
 
-TOKEN = 'enter token here'
+TOKEN = ''
 client = commands.Bot(command_prefix = '.')#command for bot is the tilda ( . )
 client.remove_command('help')
-
-
 
 
 @client.event
 #prints bot is ready in terminal
 async def on_ready():
     await client.change_presence(status=discord.Status.online, activity=discord.Game('Who am i?'))
-    print('Bot is ready')
+    print('Jarvis is Online')
 #below command is used for information about the bot.
 @client.command()
 async def help(ctx):
@@ -31,7 +29,7 @@ async def help(ctx):
     await ctx.send(embed=embed)
 
 @client.command()
-async def houseparty(ctx):
+async def HouseParty(ctx):
     embed=discord.Embed(title="House Party Protocol has been initiated, the following people have been released from the swarm.", description="Good Bye all.", color=0xff0000)
     embed.add_field(name="Daddysnow ", value="Welcome to the rice fields Motherfuckas!!!", inline=False)
     embed.add_field(name="Hwydrifter", value="I dunno, just Fuck it.", inline=True)
@@ -40,18 +38,16 @@ async def houseparty(ctx):
     await ctx.send(embed=embed)
     #kick user 567055248607150342, 355019308981813260, 481069578684858369
     #Edwin, Hwydrifter, Daddysnow
-    
-
+  
 @client.command()
 async def killedwin(ctx):
     embed=discord.Embed(title="You can't kill me! I'm everywhere!", color=0xff0000)
     embed.set_footer(text="This Message will self destruct in 2 mins.")
     await ctx.send(embed=embed)
-
-
 #only prints when member has joined or left in terminal
 @client.event
 async def on_member_join(member):
+    await send('Welcome to the discord!!')
     print(f'{member} has joined the server.')
 @client.event
 async def on_member_remove(member):
@@ -68,7 +64,9 @@ async def clear(ctx, amount=26):
 async def ping(ctx):
     await ctx.send('Pong! {0}'.format(round(client.latency * 1000)))
 
-
+@client.command()
+async def kick(ctx, member : discord.Member, *, reason=None):
+    await member.kick(reason=reason)
 
 
 
