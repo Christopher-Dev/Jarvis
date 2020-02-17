@@ -3,9 +3,8 @@ import random
 from discord.ext import commands
 
 TOKEN = ''
-client = commands.Bot(command_prefix = '.')#command for bot is the tilda ( . )
+client = commands.Bot(command_prefix = '$')#command for bot is the tilda ( $ )
 client.remove_command('help')
-
 
 @client.event
 #prints bot is ready in terminal
@@ -36,8 +35,7 @@ async def HouseParty(ctx):
     embed.add_field(name="Edwin", value="Get back to me once you've hit fuck it", inline=True)
     embed.set_footer(text="This Message will self destruct in 2 mins.")
     await ctx.send(embed=embed)
-    #kick user 567055248607150342, 355019308981813260, 481069578684858369
-    #Edwin, Hwydrifter, Daddysnow
+    #Edwin#4323, Hwydrifter#8173, Daddysnow#7904
   
 @client.command()
 async def killedwin(ctx):
@@ -46,9 +44,11 @@ async def killedwin(ctx):
     await ctx.send(embed=embed)
 #only prints when member has joined or left in terminal
 @client.event
-async def on_member_join(member):
-    await send('Welcome to the discord!!')
-    print(f'{member} has joined the server.')
+async def on_member_join(ctx):
+    embed=discord.Embed(title="Welcome to the Jarvis Dev Server", description="Enter .help in the Jarvis channel for info on the commands.", color=0x00ff00)
+    embed.set_thumbnail(url="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSEg1KbS2iNOL_jYT5XHZ8161fx5AeAzgah-eHmkCNnhGuJYDVi")
+    await ctx.send(embed=embed)
+    
 @client.event
 async def on_member_remove(member):
     print(f'{member} has left the server.')
@@ -56,9 +56,9 @@ async def on_member_remove(member):
 @client.command()
 async def clear(ctx, amount=26):
     await ctx.channel.purge(limit=amount)
-#this has been commented out while work stopped.
-#@client.command()
-#async def config(ctx)
+    embed=discord.Embed(title="I have cleared the last 25 messages for you sir", color=0x00ff00)
+    embed.set_thumbnail(url="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSEg1KbS2iNOL_jYT5XHZ8161fx5AeAzgah-eHmkCNnhGuJYDVi")
+    await ctx.send(embed=embed)
 
 @client.command()
 async def ping(ctx):
@@ -68,6 +68,13 @@ async def ping(ctx):
 async def kick(ctx, member : discord.Member, *, reason=None):
     await member.kick(reason=reason)
 
+@client.command()
+async def send_dm(ctx, member: discord.Member, *, content):
+    embed=discord.Embed(title="Welcome to the Jarvis Dev Server", description="Enter $help in the Jarvis channel for info on the commands.", color=0x00ff00)
+    embed.set_thumbnail(url="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSEg1KbS2iNOL_jYT5XHZ8161fx5AeAzgah-eHmkCNnhGuJYDVi")
+    await ctx.send(embed=embed)
+    channel = await member.create_dm()
+    await channel.send(content)
 
 
 
