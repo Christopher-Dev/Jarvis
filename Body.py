@@ -2,9 +2,10 @@ import discord
 import random
 from discord.ext import commands
 import Commands
+import discord.utils 
 
 TOKEN = ''
-client = commands.Bot(command_prefix = '$')#command for bot is the tilda ( @ )
+client = commands.Bot(command_prefix = '.')#command for bot is the tilda ( . )
 client.remove_command('help')
 
 @client.event
@@ -69,9 +70,7 @@ async def ping(ctx):
 @client.command()
 async def kick(ctx, member : discord.Member, *, reason=None):
     await member.kick(reason=reason)
-
-
-
+#This command is used for asking for help  
 @client.command()
 async def welcome(ctx, member: discord.Member, *, content):
     embed=discord.Embed(title="Welcome to the Jarvis Dev Server", description="Enter $help in the Jarvis channel for info on the commands.", color=0x00ff00)
@@ -79,6 +78,33 @@ async def welcome(ctx, member: discord.Member, *, content):
     await ctx.send(embed=embed)
     channel = await member.create_dm()
     await channel.send(content)
+
+
+@client.command(pass_context=True)
+async def add(ctx, user: discord.Member, role: discord.Role):#adds the role, format of .add Edwin#0000 <ROLE>
+    await user.add_roles(role)  
+async def remove(ctx, user: discord.Member, role: discord.Role):#adds the role, format of .add Edwin#0000 <ROLE>
+    await user.remove_roles(role)
+
+
+
+@client.command()
+async def commandlist(ctx):
+    embed=discord.Embed(title="Welcome to Jarvis Dev Command", description="All commands are Prefixed by a period  . ", color=0x00ff00)
+    embed.set_thumbnail(url="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSEg1KbS2iNOL_jYT5XHZ8161fx5AeAzgah-eHmkCNnhGuJYDVi")
+    embed.add_field(name="Adding a Role", value=".add jarvis#0000 role", inline=True)
+    embed.add_field(name="Removing a Role", value=".remove jarvis#0000 role", inline=True)
+    embed.add_field(name="Ping", value=".ping", inline=True)
+    embed.add_field(name="Help", value=".help", inline=True)
+    embed.add_field(name="Welcome", value=".welcome", inline=True)
+    embed.add_field(name="Purge", value=".clear 25", inline=True)
+    await ctx.send(embed=embed)
+
+
+
+
+
+
 
 
 
