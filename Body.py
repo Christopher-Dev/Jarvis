@@ -59,7 +59,7 @@ async def on_member_remove(member):
 @client.command()
 async def clear(ctx, amount=26):
     await ctx.channel.purge(limit=amount)
-    embed=discord.Embed(title="I have cleared upto the last 25 messages for you sir", color=0x00ff00)
+    embed=discord.Embed(title="I have cleared up to the last 25 messages for you sir", color=0x00ff00)
     embed.set_thumbnail(url="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSEg1KbS2iNOL_jYT5XHZ8161fx5AeAzgah-eHmkCNnhGuJYDVi")
     await ctx.send(embed=embed)
 
