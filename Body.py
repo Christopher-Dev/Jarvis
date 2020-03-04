@@ -34,16 +34,7 @@ async def help(ctx):
     embed.add_field(name=".ping", value="Returns Pong! and Server latency.", inline=False)
     embed.add_field(name=".help", value="Prints out the Server Bot commands.", inline=True)
     await ctx.send(embed=embed)
-@client.command()
-@commands.has_role("Python Jarvis Dev")
-async def HouseParty(ctx):
-    embed=discord.Embed(title="House Party Protocol has been initiated, the following people have been released from the swarm.", description="Good Bye all.", color=0xff0000)
-    embed.add_field(name="Daddysnow ", value="Welcome to the rice fields Motherfuckas!!!", inline=False)
-    embed.add_field(name="Hwydrifter", value="I dunno, just Fuck it.", inline=True)
-    embed.add_field(name="Edwin", value="Get back to me once you've hit fuck it", inline=True)
-    embed.set_footer(text="This Message will self destruct in 2 mins.")
-    await ctx.send(embed=embed)
-    #Edwin#4323, Hwydrifter#8173, Daddysnow#7904
+
 @client.command()
 async def killedwin(ctx, amount=2):
     embed=discord.Embed(title="You can't kill me! I'm everywhere!", color=0xff0000)
@@ -97,7 +88,30 @@ async def commandlist(ctx):
     embed.add_field(name="Purge", value=".clear 25", inline=True)
     await ctx.send(embed=embed)
 
+@client.command(pass_contex = True)
+async def ARM(ctx, user: discord.member, role: discord.Role("<ARMED>")):
+    await user.add_roles("<ARMED>")
+    embed=discord.Embed(title="House Party has Been ARMED", description="Remaining Members must ARM or HouseParty will be disarmed.", color=0xa0110a)
+    embed.set_author(name="Jarvis")
+    embed.set_thumbnail(url="https://media.giphy.com/media/3o6gbcjYiGrpaLXy7K/giphy.gif")
+    await ctx.send(embed=embed)
+async def DISARM(ctx, user: discord.Member, role: discord.Role):
+    await user.remove_roles(role)
+    embed=discord.Embed(title="House Party has Been DISARMED", description="House Party will always be waiting.", color=0xa0110a)
+    embed.set_author(name="Jarvis")
+    embed.set_thumbnail(url="https://media.giphy.com/media/3o6gbcjYiGrpaLXy7K/giphy.gif")
+    await ctx.send(embed=embed)
 
+@client.command()
+@commands.has_role("<ARMED>")
+async def HouseParty(ctx):
+    embed=discord.Embed(title="House Party Protocol has been initiated, the following people have been released from the swarm.", description="Good Bye all.", color=0xff0000)
+    embed.add_field(name="Daddysnow ", value="Welcome to the rice fields Motherfuckas!!!", inline=False)
+    embed.add_field(name="Hwydrifter", value="I dunno, just Fuck it.", inline=True)
+    embed.add_field(name="Edwin", value="Get back to me once you've hit fuck it", inline=True)
+    embed.set_footer(text="This Message will self destruct in 2 mins.")
+    await ctx.send(embed=embed)
+    #Edwin#4323, Hwydrifter#8173, Daddysnow#7904
 
 
 
