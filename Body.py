@@ -2,7 +2,9 @@ import discord
 import random
 from discord.ext import commands
 import Commands
-import discord.utils 
+import discord.utils
+import Token.py
+from Token.py import Token
 
 TOKEN = ''
 client = commands.Bot(command_prefix = '.')#command for bot is the tilda ( . )
